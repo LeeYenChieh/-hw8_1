@@ -4,33 +4,33 @@ manual example-01.in
 @subtask full
 @include samples
 gen1	10 10 3
-gen1	10 10 3
-gen1	10 10 3
-gen1	10 10 3
-gen1	10 10 3
+gen1	11 10 3
+gen1	12 10 3
+gen1	13 10 3
+gen1	14 10 3
 
 gen1	10 10 1
-gen1	10 10 1
-gen1	10 10 1
-gen1	10 10 1
-gen1	10 10 1
+gen1	11 10 1
+gen1	12 10 1
+gen1	13 10 1
+gen1	14 10 1
 
-gen1	1 10 3
-gen1	1 10 3
-gen1	1 10 3
-gen1	1 10 3
-gen1	1 10 3
+gen1	1 11 3
+gen1	1 12 3
+gen1	1 13 3
+gen1	1 14 3
+gen1	1 15 3
 
-gen1	10 15 2
-gen1	10 15 2
-gen1	10 15 2
-gen1	10 15 2
-gen1	10 15 2
+gen1	11 15 2
+gen1	12 15 2
+gen1	13 15 2
+gen1	14 15 2
+gen1	15 15 2
 
-gen1	10 10 0
-gen1	10 10 0
-gen1	10 10 0
-gen1	10 10 0
-gen1	10 10 0
+gen1	11 10 0
+gen1	12 10 0
+gen1	13 10 0
+gen1	14 10 0
+gen1	15 10 0
 
 
