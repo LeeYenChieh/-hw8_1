@@ -1,3 +1,3 @@
-public interface Element{
-    public void display();
+public abstract class Element{
+    public abstract void display();
 }

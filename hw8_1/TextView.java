@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,15 +13,15 @@ public class TextView{
         this.elements = new ArrayList<Element>();
     }
 
-    private void addElement(Element element){
+    public void addElement(Element element){
         this.elements.add(element);
     }
 
-    private void setText(Text text){
+    public void setText(Text text){
         this.text = text;
     }
 
-    private void display(){
+    public void display(){
         if(this.text == null){
             System.out.println("No text to display");
             return;

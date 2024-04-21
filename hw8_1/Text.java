@@ -1,3 +1,5 @@
 public interface Text{
-    public void display();
+
+    public void displayText();
+
 }

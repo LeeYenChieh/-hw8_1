@@ -1,3 +1,4 @@
+
 public class StandardText implements Text{
     private String content;
     StandardText(String content){
@@ -6,6 +7,6 @@ public class StandardText implements Text{
 
     @Override
     public void displayText(){
-        System.out.printformat("%s ", this.content);
+        System.out.printf("%s ", this.content);
     }
 }
