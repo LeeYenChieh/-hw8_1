@@ -1,4 +1,4 @@
-Class TextView{
+class TextView{
     Text text;
     List<Element> elements;
 
