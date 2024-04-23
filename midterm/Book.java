@@ -1,12 +1,12 @@
 public class Book{
-    public static int id;
-    public static String Author;
-    public static String Subject;
+    public int id;
+    public String Author;
+    public String Subject;
 
-    public static User lastBorrower;
-    public static boolean isBorrowed;
+    public  User lastBorrower;
+    public boolean isBorrowed;
 
-    Book(int id, String Author, String Subject){
+    public Book(int id, String Author, String Subject){
         this.id = id;
         this.Author = Author;
         this.Subject = Subject;

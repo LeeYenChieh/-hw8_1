@@ -1,5 +1,4 @@
-package midterm;
-import java.awt.print.Book;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -28,6 +27,7 @@ public class LibrarySystem {
 					line = reader.readLine();
 					buffer = line.split(" ");
 					if(buffer.length != 1) {
+						System.out.println("dsafs");
 						System.out.println("Error");
 						continue;
 					}
@@ -172,13 +172,13 @@ public class LibrarySystem {
 										checkouts.add(books.get(idxx));
 									}
 								}
-								int idx = LibrarySystem.findUser(users, buffer[2]);
-								if(idx == -1) {
+								int idxx = LibrarySystem.findUser(users, buffer[2]);
+								if(idxx == -1) {
 									System.out.println("Error");
 									continue;
 								}
-								User user2 = users.get(idx);
-								int status = borrowerHandler.checkoutBooks(user1, user2, checkouts, users, books);
+								User user2 = users.get(idxx);
+								int status = borrowerHandler.checkoutBooks(user1, user2, checkouts, books, users);
 								if(status == 1) { 
 									System.out.println("Error");
 									continue;
@@ -239,12 +239,12 @@ public class LibrarySystem {
 									System.out.println("Error");
 									continue;
 								}
-								int idx = LibrarySystem.findBook(users, Integer.parseInt(buffer[2]));
-								if(idx == -1) {
+								int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[2]));
+								if(idxx == -1) {
 									System.out.println("Error");
 									continue;
 								}
-								Book book2 = books.get(idx);
+								Book book2 = books.get(idxx);
 								int status = borrowerHandler.findBorrower(book2);
 								if(status == 1) { 
 									System.out.println("Error");
@@ -300,13 +300,13 @@ public class LibrarySystem {
 										checkouts.add(books.get(idxx));
 									}
 								}
-								int idx = LibrarySystem.findUser(users, buffer[2]);
-								if(idx == -1) {
+								int idxx = LibrarySystem.findUser(users, buffer[2]);
+								if(idxx == -1) {
 									System.out.println("Error");
 									continue;
 								}
-								User user2 = users.get(idx);
-								int status = staffHandler.checkoutBooks(user1, user2, checkouts, users, books);
+								User user2 = users.get(idxx);
+								int status = staffHandler.checkoutBooks(user1, user2, checkouts, books, users);
 								if(status == 1) { 
 									System.out.println("Error");
 									continue;
@@ -367,12 +367,12 @@ public class LibrarySystem {
 									System.out.println("Error");
 									continue;
 								}
-								int idx = LibrarySystem.findBook(users, Integer.parseInt(buffer[2]));
-								if(idx == -1) {
+								int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[2]));
+								if(idxx == -1) {
 									System.out.println("Error");
 									continue;
 								}
-								Book book2 = books.get(idx);
+								Book book2 = books.get(idxx);
 								int status = staffHandler.findBorrower(book2);
 								if(status == 1) { 
 									System.out.println("Error");
@@ -397,7 +397,7 @@ public class LibrarySystem {
 	public static int findBook(ArrayList<Book> books, String Author, String Subject) {
 		int idx = -1;
 		for(int i = 0; i < books.size(); i++) {
-			if(Author.equals(books.get(i).Author && Subject.equals(books.get(i).Subject))) {
+			if(Author.equals(books.get(i).Author) && Subject.equals(books.get(i).Subject)) {
 				idx = i;
 				break;
 			}

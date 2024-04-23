@@ -5,7 +5,7 @@ public class User{
     ArrayList<Book> borrowedBooks;
     int maxCheckoutNum;
 
-    User(String userType, String userName, int maxCheckoutNum){
+    public User(String userType, String userName, int maxCheckoutNum){
         this.userType = userType;
         this.userName = userName;
         this.borrowedBooks = new ArrayList<>();
