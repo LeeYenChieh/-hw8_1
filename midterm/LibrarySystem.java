@@ -17,8 +17,8 @@ public class LibrarySystem {
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		String line;
 		String[] buffer;
-		int number_of_book;
-		int number_of_user;
+		int number_of_book = 0;
+		int number_of_user = 0;
 		int id = 0;
 		try {
 			
@@ -27,6 +27,10 @@ public class LibrarySystem {
 				try {
 					line = reader.readLine();
 					buffer = line.split(" ");
+					if(buffer.length != 1) {
+						System.out.println("Error");
+						continue;
+					}
 					number_of_book = Integer.parseInt(buffer[0]);
 					break;
 					
