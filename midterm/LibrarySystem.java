@@ -50,17 +50,8 @@ public class LibrarySystem {
 					System.out.println("Error");
 					continue;
 				}
-				int idx = LibrarySystem.findBook(books, buffer[0], buffer[1]);
-				if(idx == -1) {
-					books.add(new Book(id, buffer[0], buffer[1]));
-					id += 1;
-				}
-				else {
-					Book book = books.get(idx);
-					book.currrentNum += 1;
-					book.maxNum += 1;
-					books.set(idx, book);
-				}
+				books.add(new Book(id, buffer[0], buffer[1]));
+				id += 1;
 			}
 			
 			
@@ -70,6 +61,10 @@ public class LibrarySystem {
 				try {
 					line = reader.readLine();
 					buffer = line.split(" ");
+					if(buffer.length != 1) {
+						System.out.println("Error");
+						continue;
+					}
 					number_of_user = Integer.parseInt(buffer[0]);
 					break;
 					
@@ -81,6 +76,10 @@ public class LibrarySystem {
 			
 			for(int i = 0; i < number_of_user; i++) {
 				line = reader.readLine();
+				if (line == null) {
+					System.out.println("Error");
+					continue;
+				}
 				buffer = line.split(" ");
 				if(!buffer[0].equals("Staff") && !buffer[0].equals("Borrower")) {
 					System.out.println("Error");
@@ -90,13 +89,7 @@ public class LibrarySystem {
 					System.out.println("Error");
 					continue;
 				}
-				int idx = -1;
-				for(int j = 0; j < users.size(); j++) {
-					if(buffer[1].equals(users.get(j).userName)) {
-						idx = j;
-						break;
-					}
-				}
+				int idx = LibrarySystem.findUser(users, buffer[1]);
 				if(idx != -1) {
 					System.out.println("Error");
 					continue;
@@ -404,7 +397,7 @@ public class LibrarySystem {
 	public static int findBook(ArrayList<Book> books, String Author, String Subject) {
 		int idx = -1;
 		for(int i = 0; i < books.size(); i++) {
-			if(Author.equals(books.get(i).Author && Subject.equals(books.get(i).Subject)) {
+			if(Author.equals(books.get(i).Author && Subject.equals(books.get(i).Subject))) {
 				idx = i;
 				break;
 			}
