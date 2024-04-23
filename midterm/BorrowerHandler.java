@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public class BorrowerHandler implements TransactionHandler{
-    public int checkoutBooks(User staff, User borrower, ArrayList<int> CheckingOut, ArrayList<Book> books, ArrayList<User> users){
+    public int checkoutBooks(User staff, User borrower, ArrayList<Book> CheckingOut, ArrayList<Book> books, ArrayList<User> users){
         System.out.println("Borrower can not check out the books");
         return -1;
     }
@@ -13,7 +13,7 @@ public class BorrowerHandler implements TransactionHandler{
         System.out.println("Borrower can not add book");
         return -1;
     }
-    public int removeBook(User staff, Book Removing, ArrayList<Book> books){
+    public int removeBook(int Removing, ArrayList<Book> books){
         System.out.println("Borrower can not remove book");
         return -1;
     }
@@ -21,7 +21,7 @@ public class BorrowerHandler implements TransactionHandler{
     public int listAuthor(String Author, ArrayList<Book> books){
         for(Book b: books){
             if(b.Author.equals(Author)){
-                System.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
+                System.out.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
             }
         }
         return 0;
@@ -29,7 +29,7 @@ public class BorrowerHandler implements TransactionHandler{
     public int listSubject(String Subject, ArrayList<Book> books){
         for(Book b: books){
             if(b.Subject.equals(Subject)){
-                System.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
+                System.out.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
             }
         }
         return 0;
@@ -47,7 +47,7 @@ public class BorrowerHandler implements TransactionHandler{
                 break;
             }
         }
-        for(Book b: u.borrowedBooks){
+        for(Book b: borrower.borrowedBooks){
             System.out.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
         }
         return 0;
