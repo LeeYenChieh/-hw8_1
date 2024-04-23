@@ -24,10 +24,8 @@ public class LibrarySystem {
 			// Book Input
 			while((line = reader.readLine()) != null) {
 				try {
-					line = reader.readLine();
 					buffer = line.split(" ");
 					if(buffer.length != 1) {
-						System.out.println("dsafs");
 						System.out.println("Error");
 						continue;
 					}
@@ -59,7 +57,6 @@ public class LibrarySystem {
 			// User Input
 			while((line = reader.readLine()) != null) {
 				try {
-					line = reader.readLine();
 					buffer = line.split(" ");
 					if(buffer.length != 1) {
 						System.out.println("Error");
@@ -115,7 +112,6 @@ public class LibrarySystem {
 			// Transaction Input
 			while((line = reader.readLine()) != null) {
 				try {
-					line = reader.readLine();
 					buffer = line.split(" ");
 					int idx = LibrarySystem.findUser(users, buffer[0]);
 					if(idx == -1) {
@@ -124,7 +120,7 @@ public class LibrarySystem {
 					}
 					else {
 						User user1 = users.get(idx);
-						if(user1.userType.equals("Staff")) {
+						if(user1.userType.equals("Borrower")) {
 							if(buffer[1].equals("addBook")) {
 								if(buffer.length != 2) {
 									System.out.println("Error");
@@ -287,23 +283,23 @@ public class LibrarySystem {
 									System.out.println("Error");
 									continue;
 								}
+								int idxx = LibrarySystem.findUser(users, buffer[2]);
+								if(idxx == -1) {
+									System.out.println("Error");
+									continue;
+								}
 								line = reader.readLine();
 								buffer = line.split(" ");
 								ArrayList<Book> checkouts = new ArrayList<>();
 								int fail = 0;
 								for(int k = 0; k < buffer.length; k++) {
-									int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
-									if(idxx == -1) {
+									int idxxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
+									if(idxxy == -1) {
 										fail = 1;
 									}
 									else {
-										checkouts.add(books.get(idxx));
+										checkouts.add(books.get(idxxy));
 									}
-								}
-								int idxx = LibrarySystem.findUser(users, buffer[2]);
-								if(idxx == -1) {
-									System.out.println("Error");
-									continue;
 								}
 								User user2 = users.get(idxx);
 								int status = staffHandler.checkoutBooks(user1, user2, checkouts, books, users);
