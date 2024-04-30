@@ -2,23 +2,30 @@ import java.util.ArrayList;
 
 public class StaffHandler implements TransactionHandler{
     public int checkoutBooks(User staff, User borrower, ArrayList<Book> CheckingOut, ArrayList<Book> books, ArrayList<User> users){
-        if(staff.userType.equals("Borrower")){
-            System.out.println("Borrower can not check out the books");
-            return -1;
-        }
         if(borrower.userType.equals("Staff")){
             System.out.println("Error");
             return -1;
         }
+        int numBooks = borrower.borrowedBooks.size();
         for(Book b: CheckingOut){
-            if(b.isAvailable()){
-                if(borrower.maxCheckoutNum == borrower.borrowedBooks.size()){
-                    System.out.println("Can not check out since the number of books exceed the limitation of user can check-out");
-                    return -1;
+        	if(b != null) {
+        		if(b.isAvailable()){
+                    if(borrower.maxCheckoutNum == numBooks){
+                        System.out.println("Can not check out since the number of books exceed the limitation of user can check-out");
+                        continue;
+                    }
+                    b.checkout(borrower);
+                    borrower.checkout(b);
                 }
-                b.checkout(borrower);
-                borrower.checkout(b);
-            }
+        		else {
+        			System.out.println("Error");
+        		}
+        		numBooks += 1;
+        	}
+        	else {
+        		System.out.println("Error");
+        	}
+            
         }
         return 0;
     }
@@ -36,7 +43,7 @@ public class StaffHandler implements TransactionHandler{
         }
 
         return 1;
-    }   
+    }
 
     public int addBook(int MaxId, String bookAuthor, String BookSubject, ArrayList<Book> books){
         Book newBook = new Book(MaxId, bookAuthor, BookSubject);

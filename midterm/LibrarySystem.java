@@ -176,26 +176,18 @@ public class LibrarySystem {
 							line = reader.readLine();
 							buffer = line.split(" ");
 							ArrayList<Book> checkouts = new ArrayList<>();
-							int fail = 0;
 							for(int k = 0; k < buffer.length; k++) {
 								int idxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
 								if(idxy == -1) {
-									fail += 1;
+									checkouts.add(null);
 								}
 								else {
 									checkouts.add(books.get(idxy));
 								}
 							}
-							for (int f = 0; f < fail; f++) {
-								System.out.println("Error");
-							}
-							
+
 							User user2 = users.get(idxx);
 							int status = handler.checkoutBooks(user1, user2, checkouts, books, users);
-							if(status == 1) { 
-								System.out.println("Error");
-								continue;
-							}
 						}
 						else if(buffer[1].equals("return")) {
 							if(buffer.length != 3) {
