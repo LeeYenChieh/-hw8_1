@@ -29,6 +29,7 @@ public class StaffHandler implements TransactionHandler{
                     System.out.println("Can not return since the book isn't checked out");
                 }else{
                     b.returnBook();
+                    b.lastBorrower.borrowedBooks.remove(b);
                 }
                 return 0;
             }

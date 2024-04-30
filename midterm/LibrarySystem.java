@@ -10,8 +10,7 @@ public class LibrarySystem {
 	public static void main(String[] args) throws IOException{
 		ArrayList<Book> books = new ArrayList<>();
 		ArrayList<User> users = new ArrayList<>();
-		TransactionHandler staffHandler = new StaffHandler();
-		TransactionHandler borrowerHandler = new BorrowerHandler();
+		TransactionHandler handler;
         File inputFile = new File(args[0]);
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		String line;
@@ -37,14 +36,17 @@ public class LibrarySystem {
 					continue;
 				}
 			}
+			
 			for(int i = 0; i < number_of_book; i++) {
 				line = reader.readLine();
 				if (line == null) {
+					
 					System.out.println("Error");
 					continue;
 				}
 				buffer = line.split(" ");
 				if(buffer.length != 2) {
+					
 					System.out.println("Error");
 					continue;
 				}
@@ -121,259 +123,145 @@ public class LibrarySystem {
 					else {
 						User user1 = users.get(idx);
 						if(user1.userType.equals("Borrower")) {
-							if(buffer[1].equals("addBook")) {
-								if(buffer.length != 2) {
-									System.out.println("Error");
-									continue;
-								}
-								line = reader.readLine();
-								buffer = line.split(" ");
-								if(buffer.length != 2) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = borrowerHandler.addBook(id, buffer[0], buffer[1], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-								id += 1;
-							}
-							else if(buffer[1].equals("removeBook")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = borrowerHandler.removeBook(Integer.parseInt(buffer[2]), books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("checkout")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								line = reader.readLine();
-								buffer = line.split(" ");
-								ArrayList<Book> checkouts = new ArrayList<>();
-								int fail = 0;
-								for(int k = 0; k < buffer.length; k++) {
-									int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
-									if(idxx == -1) {
-										fail = 1;
-									}
-									else {
-										checkouts.add(books.get(idxx));
-									}
-								}
-								int idxx = LibrarySystem.findUser(users, buffer[2]);
-								if(idxx == -1) {
-									System.out.println("Error");
-									continue;
-								}
-								User user2 = users.get(idxx);
-								int status = borrowerHandler.checkoutBooks(user1, user2, checkouts, books, users);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("return")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = borrowerHandler.returnBook(user1, Integer.parseInt(buffer[2]), books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("listAuthor")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = borrowerHandler.listAuthor(buffer[2], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("listSubject")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = borrowerHandler.listSubject(buffer[2], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("findChecked")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-//								int idx = LibrarySystem.findUser(users, buffer[2]);
-//								if(idx == -1) {
-//									System.out.println("Error");
-//									continue;
-//								}
-//								User user2 = users.get(idx);
-								int status = borrowerHandler.findChecked(buffer[0], buffer[2], users);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
-							else if(buffer[1].equals("Borrower")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[2]));
-								if(idxx == -1) {
-									System.out.println("Error");
-									continue;
-								}
-								Book book2 = books.get(idxx);
-								int status = borrowerHandler.findBorrower(book2);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-							}
+							handler = new BorrowerHandler();
 						}
 						else if(user1.userType.equals("Staff")) {
-							if(buffer[1].equals("addBook")) {
-								if(buffer.length != 2) {
-									System.out.println("Error");
-									continue;
-								}
-								line = reader.readLine();
-								buffer = line.split(" ");
-								if(buffer.length != 2) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = staffHandler.addBook(id, buffer[0], buffer[1], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
-								id += 1;
+							handler = new StaffHandler();
+						}
+						else {
+							System.out.println("Error");
+							continue;
+						}
+						
+
+						if(buffer[1].equals("addBook")) {
+							if(buffer.length != 2) {
+								System.out.println("Error");
+								continue;
 							}
-							else if(buffer[1].equals("removeBook")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = staffHandler.removeBook(Integer.parseInt(buffer[2]), books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+							line = reader.readLine();
+							buffer = line.split(" ");
+							if(buffer.length != 2) {
+								System.out.println("Error");
+								continue;
 							}
-							else if(buffer[1].equals("checkout")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int idxx = LibrarySystem.findUser(users, buffer[2]);
-								if(idxx == -1) {
-									System.out.println("Error");
-									continue;
-								}
-								line = reader.readLine();
-								buffer = line.split(" ");
-								ArrayList<Book> checkouts = new ArrayList<>();
-								int fail = 0;
-								for(int k = 0; k < buffer.length; k++) {
-									int idxxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
-									if(idxxy == -1) {
-										fail = 1;
-									}
-									else {
-										checkouts.add(books.get(idxxy));
-									}
-								}
-								User user2 = users.get(idxx);
-								int status = staffHandler.checkoutBooks(user1, user2, checkouts, books, users);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+							int status = handler.addBook(id, buffer[0], buffer[1], books);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
 							}
-							else if(buffer[1].equals("return")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
+							id += 1;
+						}
+						else if(buffer[1].equals("removeBook")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int status = handler.removeBook(Integer.parseInt(buffer[2]), books);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
+							}
+						}
+						else if(buffer[1].equals("checkout")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int idxx = LibrarySystem.findUser(users, buffer[2]);
+							if(idxx == -1) {
+								System.out.println("Error");
+								continue;
+							}
+							line = reader.readLine();
+							buffer = line.split(" ");
+							ArrayList<Book> checkouts = new ArrayList<>();
+							int fail = 0;
+							for(int k = 0; k < buffer.length; k++) {
+								int idxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
+								if(idxy == -1) {
+									fail += 1;
 								}
-								int status = staffHandler.returnBook(user1, Integer.parseInt(buffer[2]), books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
+								else {
+									checkouts.add(books.get(idxy));
 								}
 							}
-							else if(buffer[1].equals("listAuthor")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = staffHandler.listAuthor(buffer[2], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+							for (int f = 0; f < fail; f++) {
+								System.out.println("Error");
 							}
-							else if(buffer[1].equals("listSubject")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int status = staffHandler.listSubject(buffer[2], books);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+							
+							User user2 = users.get(idxx);
+							int status = handler.checkoutBooks(user1, user2, checkouts, books, users);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
 							}
-							else if(buffer[1].equals("findChecked")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
+						}
+						else if(buffer[1].equals("return")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int status = handler.returnBook(user1, Integer.parseInt(buffer[2]), books);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
+							}
+						}
+						else if(buffer[1].equals("listAuthor")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int status = handler.listAuthor(buffer[2], books);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
+							}
+						}
+						else if(buffer[1].equals("listSubject")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int status = handler.listSubject(buffer[2], books);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
+							}
+						}
+						else if(buffer[1].equals("findChecked")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
 //								int idx = LibrarySystem.findUser(users, buffer[2]);
 //								if(idx == -1) {
 //									System.out.println("Error");
 //									continue;
 //								}
 //								User user2 = users.get(idx);
-								int status = staffHandler.findChecked(buffer[0], buffer[2], users);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+							int status = handler.findChecked(buffer[0], buffer[2], users);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
 							}
-							else if(buffer[1].equals("Borrower")) {
-								if(buffer.length != 3) {
-									System.out.println("Error");
-									continue;
-								}
-								int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[2]));
-								if(idxx == -1) {
-									System.out.println("Error");
-									continue;
-								}
-								Book book2 = books.get(idxx);
-								int status = staffHandler.findBorrower(book2);
-								if(status == 1) { 
-									System.out.println("Error");
-									continue;
-								}
+						}
+						else if(buffer[1].equals("Borrower")) {
+							if(buffer.length != 3) {
+								System.out.println("Error");
+								continue;
+							}
+							int idxx = LibrarySystem.findBook(books, Integer.parseInt(buffer[2]));
+							if(idxx == -1) {
+								System.out.println("Error");
+								continue;
+							}
+							Book book2 = books.get(idxx);
+							int status = handler.findBorrower(book2);
+							if(status == 1) { 
+								System.out.println("Error");
+								continue;
 							}
 						}
 					}
