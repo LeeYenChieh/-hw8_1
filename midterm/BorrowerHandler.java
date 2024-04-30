@@ -53,7 +53,7 @@ public class BorrowerHandler implements TransactionHandler{
         return 0;
     }
     public int findBorrower(Book book){
-        System.out.println("Borrower can not find the borrower");
+        System.out.println("Borrower can not find borrower");
         return -1;
     }
 }
