@@ -256,6 +256,9 @@ public class LibrarySystem {
 								continue;
 							}
 						}
+						else {
+							System.out.println("Error");
+						}
 					}
 					
 				} catch (Exception e) {
