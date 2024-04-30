@@ -18,7 +18,7 @@ public class StaffHandler implements TransactionHandler{
                     borrower.checkout(b);
                 }
         		else {
-        			System.out.println("Error");
+        			System.out.println("Can not check out since the book is checked out");
         		}
         		numBooks += 1;
         	}
