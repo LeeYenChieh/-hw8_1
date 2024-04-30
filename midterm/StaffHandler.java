@@ -34,7 +34,6 @@ public class StaffHandler implements TransactionHandler{
                 return 0;
             }
         }
-        System.out.println("Error");
 
         return 1;
     }   
@@ -48,15 +47,12 @@ public class StaffHandler implements TransactionHandler{
         for(Book b: books){
             if(b.id == RemovingId){
                 if(b.isBorrowed){
-                    User lastBorrower = b.lastBorrower;
-                    lastBorrower.removeBook(b);
-                    System.out.println("Error");
+                    return 1;
                 }
                 books.remove(b);
                 return 0;
             }
         }
-        System.out.println("Error");
         return 1;
     }
 
