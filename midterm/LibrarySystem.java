@@ -40,7 +40,6 @@ public class LibrarySystem {
 			for(int i = 0; i < number_of_book; i++) {
 				line = reader.readLine();
 				if (line == null) {
-					
 					System.out.println("Error");
 					continue;
 				}
