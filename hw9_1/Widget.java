@@ -1,5 +1,7 @@
 public abstract class Widget {
-    public void display(Style style){
-        style.display(this);
+    String name;
+    public void display(Style style){};
+    public String getName(String name){
+        return this.name;
     }
 }
