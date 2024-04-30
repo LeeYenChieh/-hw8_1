@@ -48,6 +48,7 @@ public class StaffHandler implements TransactionHandler{
             if(b.id == RemovingId){
                 if(b.isBorrowed){
                     User lastBorrower = b.lastBorrower;
+                    lastBorrower.removeBook(b);
                     System.out.println("Error");
                 }
                 books.remove(b);

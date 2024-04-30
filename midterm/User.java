@@ -11,6 +11,10 @@ public class User{
         this.borrowedBooks = new ArrayList<>();
         this.maxCheckoutNum = maxCheckoutNum;
     }
+
+    public void removeBook(Book book){
+        this.borrowedBooks.remove(book);
+    }
     public void checkout(Book book){
         this.borrowedBooks.add(book);
     }
