@@ -84,7 +84,7 @@ public class LibrarySystem {
 					System.out.println("Error");
 					continue;
 				}
-				if ((buffer[0].equals("Staff") && buffer.length != 2) || buffer[0].equals("Borrower") && buffer.length != 3) {
+				if ((buffer[0].equals("Staff") && buffer.length != 2) || (buffer[0].equals("Borrower") && buffer.length != 3)) {
 					System.out.println("Error");
 					continue;
 				}
