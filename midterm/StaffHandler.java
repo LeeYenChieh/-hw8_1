@@ -85,6 +85,9 @@ public class StaffHandler implements TransactionHandler{
                 break;
             }
         }
+        if(user2_object == null || !user2_object.userType.equals("Borrower")) {
+        	return 1;
+        }
         for(Book b: user2_object.borrowedBooks){
             System.out.printf("ID: %s Author: %s Subject: %s\n", b.id, b.Author, b.Subject);
         }
