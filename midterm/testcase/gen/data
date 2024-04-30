@@ -1,5 +1,13 @@
 @subtask samples
 manual sample0.in
+manual sample1.in
+manual sample2.in
+manual sample3.in
+manual sample4.in
+manual sample5.in
+manual sample6.in
+manual sample7.in
+
 
 @subtask full
 @include samples

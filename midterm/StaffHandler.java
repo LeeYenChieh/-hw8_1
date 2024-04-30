@@ -10,7 +10,7 @@ public class StaffHandler implements TransactionHandler{
         for(Book b: CheckingOut){
         	if(b != null) {
         		if(b.isAvailable()){
-                    if(borrower.maxCheckoutNum == numBooks){
+                    if(borrower.maxCheckoutNum <= numBooks){
                         System.out.println("Can not check out since the number of books exceed the limitation of user can check-out");
                         continue;
                     }
