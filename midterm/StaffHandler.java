@@ -16,11 +16,11 @@ public class StaffHandler implements TransactionHandler{
                     }
                     b.checkout(borrower);
                     borrower.checkout(b);
+                    numBooks += 1;
                 }
         		else {
         			System.out.println("Can not check out since the book is checked out");
         		}
-        		numBooks += 1;
         	}
         	else {
         		System.out.println("Error");
