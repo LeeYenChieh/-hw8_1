@@ -177,13 +177,19 @@ public class LibrarySystem {
 							buffer = line.split(" ");
 							ArrayList<Book> checkouts = new ArrayList<>();
 							for(int k = 0; k < buffer.length; k++) {
-								int idxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
-								if(idxy == -1) {
+								try {
+									int idxy = LibrarySystem.findBook(books, Integer.parseInt(buffer[k]));
+									if(idxy == -1) {
+										checkouts.add(null);
+									}
+									else {
+										checkouts.add(books.get(idxy));
+									}
+								}
+								catch (Exception e){
 									checkouts.add(null);
 								}
-								else {
-									checkouts.add(books.get(idxy));
-								}
+								
 							}
 
 							User user2 = users.get(idxx);
